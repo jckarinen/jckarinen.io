@@ -8,3 +8,6 @@ will build this primarily in react with a node backend because why not - i've ne
 
 would eventually like to build in a "blog" of sorts too. not that anyone will ever actually read it, but at the very least it can serve as a record of the things i've been working on and thinking about, to myself if no one else. but first i'll focus on deploying the simplest possible thing
 
+---
+
+ok, got the basic site working. will fix up this README eventually to be a little more coherent
