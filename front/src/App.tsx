@@ -1,6 +1,12 @@
 import './App.scss'
+import { useEffect } from 'react'
 
 function App() {
+    useEffect(() => {
+        document.fonts.ready.then(() => {
+            document.body.classList.add('show')
+        })
+    }, []);
 
   return (
     <>
