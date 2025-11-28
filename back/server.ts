@@ -7,10 +7,14 @@ import fs from 'fs'
 const isDevEnvironment: () => boolean = () => {
   return !process.env.PROD
 }
+const BACKEND_ROOT_DIR = isDevEnvironment()
+    ? import.meta.dirname
+    : path.resolve(import.meta.dirname, '..')
+const PROJECT_ROOT_DIR = path.resolve(BACKEND_ROOT_DIR, '..')
 const SECRETS = {
   webhook: isDevEnvironment()
       ? null
-      : fs.readFileSync(path.join(import.meta.dirname, 'secrets', 'webhook.txt'))
+      : fs.readFileSync(path.join(BACKEND_ROOT_DIR, 'secrets', 'webhook.txt'))
 }
 const PORT = 3003
 const app = express();
@@ -28,7 +32,7 @@ app.post('/webhook', express.raw({ type: 'application/json' }), (req: Request, r
       .digest('hex')
   if (hash !== sig) return res.status(401).send('Invalid signature')
   try {
-    execSync(path.join(import.meta.dirname, 'build.sh'))
+    execSync(path.join(PROJECT_ROOT_DIR, 'build.sh'))
     res.status(200).send('OK')
   }
   catch (err) {
