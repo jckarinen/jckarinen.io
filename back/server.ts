@@ -14,7 +14,7 @@ const PROJECT_ROOT_DIR = path.resolve(BACKEND_ROOT_DIR, '..')
 const SECRETS = {
   webhook: isDevEnvironment()
       ? null
-      : fs.readFileSync(path.join(BACKEND_ROOT_DIR, 'secrets', 'webhook.txt'))
+      : fs.readFileSync(path.join(BACKEND_ROOT_DIR, 'secrets', 'webhook.txt'), 'utf8').trim()
 }
 const PORT = 3003
 const app = express();
